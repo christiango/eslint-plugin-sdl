@@ -30,6 +30,18 @@ ruleTester.run(ruleId, rule, {
         test.innerHTML = test;
         test.outerHTML = test;
       `
+    },
+    {
+      languageOptions: testUtils.tsLanguageOptions,
+      code: `
+        function main() {
+          class Element {
+            innerHTML = "";
+          }
+          const element = new Element();
+          element.innerHTML = "test";
+        }
+      `
     }
   ],
   invalid: [
@@ -47,6 +59,15 @@ ruleTester.run(ruleId, rule, {
         { messageId: "noInnerHtml", line: 4 },
         { messageId: "noInsertAdjacentHTML", line: 5 }
       ]
+    },
+    {
+      languageOptions: testUtils.tsLanguageOptions,
+      code: `
+        function main(element: Element) {
+          element.innerHTML = "test";
+        }
+      `,
+      errors: [{ messageId: "noInnerHtml", line: 3 }]
     },
     {
       code: `

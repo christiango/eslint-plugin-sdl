@@ -52,6 +52,14 @@ function main() {
         { messageId: "default", line: 2 },
         { messageId: "default", line: 4 }
       ]
+    },
+    {
+      languageOptions: testUtils.tsLanguageOptions,
+      code: `
+        declare const target: Window | null;
+        target.postMessage(message, "*");
+      `,
+      errors: [{ messageId: "default", line: 3 }]
     }
   ]
 });
