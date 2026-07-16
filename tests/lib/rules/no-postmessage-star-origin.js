@@ -28,6 +28,19 @@ function main() {
   w.postMessage('test', '*');
 }
       `
+    },
+    {
+      languageOptions: testUtils.tsLanguageOptions,
+      code: `
+function main() {
+  class Window {
+    postMessage(): void {
+    };
+  }
+  const target = new Window();
+  target.postMessage('test', '*');
+}
+      `
     }
   ],
   invalid: [
